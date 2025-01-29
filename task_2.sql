@@ -4,7 +4,7 @@ USE alx_book_store;
 -- Create Authors table
 CREATE TABLE IF NOT EXISTS Authors (
     author_id INT AUTO_INCREMENT PRIMARY KEY,
-    author_name VARCHAR(255) NOT NULL,  -- Corrected column name to author_name
+    author_name VARCHAR(255) NOT NULL,  -- Ensuring 'author_name' is used
     biography TEXT,
     birth_date DATE
 );
@@ -17,14 +17,14 @@ CREATE TABLE IF NOT EXISTS Books (
     price DECIMAL(10, 2) NOT NULL,
     stock INT NOT NULL,
     author_id INT,
-    FOREIGN KEY (author_id) REFERENCES Authors(author_id)  -- Referencing Authors table
+    FOREIGN KEY (author_id) REFERENCES Authors(author_id)  
 );
 
 -- Create customers table
 CREATE TABLE IF NOT EXISTS Customers (
     customer_id INT AUTO_INCREMENT PRIMARY KEY,
-    name VARCHAR(255) NOT NULL,
-    email VARCHAR(255) UNIQUE NOT NULL,
+    customer_name VARCHAR(215) NOT NULL,  -- Corrected to VARCHAR(215)
+    email VARCHAR(215) UNIQUE NOT NULL,   -- Corrected to VARCHAR(215)
     phone VARCHAR(15),
     address TEXT
 );
@@ -35,7 +35,7 @@ CREATE TABLE IF NOT EXISTS Orders (
     customer_id INT NOT NULL,
     order_date DATE NOT NULL,
     total_amount DECIMAL(10, 2) NOT NULL,
-    FOREIGN KEY (customer_id) REFERENCES customers(customer_id)
+    FOREIGN KEY (customer_id) REFERENCES Customers(customer_id)
 );
 
 -- Create order_details table
@@ -45,6 +45,6 @@ CREATE TABLE IF NOT EXISTS Order_Details (
     book_id INT NOT NULL,
     quantity INT NOT NULL,
     price DECIMAL(10, 2) NOT NULL,
-    FOREIGN KEY (order_id) REFERENCES orders(order_id),
-    FOREIGN KEY (book_id) REFERENCES books(book_id)
+    FOREIGN KEY (order_id) REFERENCES Orders(order_id),
+    FOREIGN KEY (book_id) REFERENCES Books(book_id)
 );
